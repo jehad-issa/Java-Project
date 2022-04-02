@@ -1,0 +1,135 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body{
+    background-image: url('/img/background.jpg');
+    background-size: cover;
+    
+}
+body::before
+{
+    content: "       ";
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top:0;
+    height: 200%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.6;
+    z-index: -1;
+}
+*{
+    
+    font-family: Roboto;
+}
+
+
+/*header*/
+header{
+    display:flex;
+    justify-content:space-between; 
+    margin: 20px 60px 0 60px;   
+}
+.left-header{
+    display: flex;
+    
+}
+.left-header h1{
+    font-family: Roboto;
+    font-weight: bold;
+    font-size:40pt;
+    color: white;
+}
+.right-header{
+    width:10rem;
+    margin-top: 0.6%;
+}
+
+
+
+.right-header .btn{
+    width:100%;
+    box-shadow: gray 1px 1px;
+    font-weight:bold;
+    font-size: 14pt;
+    border-radius: 10px;
+}
+/*navbar*/
+.navbar{
+    background-color: #d6a268;
+    margin:1rem 2rem;
+    border-radius: 10px;
+    padding:1rem;
+    padding-right: 2rem;
+}
+.navbar .navbar-collapse .navbar-nav .nav-item a  {
+    font-size: 1.5rem;
+    color:black;
+    font-weight: bolder;
+    
+}
+.navbar .navbar-collapse .navbar-nav .nav-item   {
+    margin-left:1rem;
+    margin-right:1rem; 
+}
+.navbar .navbar-collapse .navbar-nav .nav-item .nav-link:hover ,.navbar .navbar-collapse .navbar-nav .nav-item .nav-link i:hover   {
+    color:rgb(15, 83, 24);
+}
+.navbar .navbar-collapse .navbar-nav .nav-item a i ,.navbar .navbar-collapse .d-flex .btn i{
+
+    color:black;
+}
+.navbar .navbar-collapse .d-flex .btn  {
+    width:8rem;
+    color:black;
+    border-radius: 15px;
+}
+.navbar .navbar-collapse .d-flex .me-2  {
+    border-radius: 10px;
+}
+/*section one*/
+.section1 .h2 ,.h1{
+    color :white;
+    margin:10px 0px 30px 100px;
+}
+.h1{
+    font-weight: bolder;
+}
+.fa-heart-o {
+    color: red;
+    cursor: pointer;
+}
+
+.fa-heart {
+    color: red;
+    cursor: pointer;
+    
+    
+
+}
+#heart{
+    height: 2rem;
+    width: 200px;
+    
+}
+  /* MEDIA QUERIES */
+
+@media only screen and (max-width: 1259px) { 
+    body::before {
+        height: 380%;
+    }
+}
+@media only screen and (max-width: 900px) { 
+    body::before {
+        height: 430%;
+    }
+}
+@media only screen and (max-width: 776px) { 
+    body::before {
+        height: 590%;
+    }
+}
+
+

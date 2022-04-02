@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -20,11 +21,12 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="hosts")
+@Table(name="users")
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     
     @Size(min = 1 , message = "Name is required!")
@@ -81,6 +83,13 @@ public class User {
         joinColumns = @JoinColumn(name = "host_id"), 
         inverseJoinColumns = @JoinColumn(name = "visitor_id"))
     private List<User> fans;
+    
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "favorites", 
+        joinColumns = @JoinColumn(name = "visitor_id"), 
+        inverseJoinColumns = @JoinColumn(name = "host_id"))
+    private List<User> likedHosts;
    
     //relationships with reviews table
     @OneToMany(mappedBy="host", fetch = FetchType.LAZY)
@@ -202,6 +211,14 @@ public class User {
 
 	public void setFans(List<User> fans) {
 		this.fans = fans;
+	}
+
+	public List<User> getLikedHosts() {
+		return likedHosts;
+	}
+
+	public void setLikedHosts(List<User> likedHosts) {
+		this.likedHosts = likedHosts;
 	}
 
 	public List<HostApartment> getApartmentsToVisit() {

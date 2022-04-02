@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 
 @Entity
@@ -22,9 +25,11 @@ public class Review {
     @GeneratedValue
     private Long id;
     
-
+    @NotEmpty(message = "Review is required")
     private String hostReview;
     
+    @Positive
+    @NotNull(message = "Rank is required")
     private double hostRank;
 
     

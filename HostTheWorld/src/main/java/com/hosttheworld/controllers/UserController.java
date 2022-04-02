@@ -1,6 +1,7 @@
 package com.hosttheworld.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -42,6 +43,9 @@ public class UserController {
     	
     	if (result.hasErrors()) {
             return "HostForms.jsp";
+        }else if (userService.findAllHosts().size() == 0) {
+        	userService.saveWithAdminRole(host);
+        	return "redirect:/login";
         }
         userService.saveWithHostRole(host);
         return "redirect:/login";
@@ -66,7 +70,6 @@ public class UserController {
         return "redirect:/login";
     }
     
-    
     //lOGIN
     @RequestMapping("/login")
     public String hostlogin(@RequestParam(value="error", required=false) String error,
@@ -80,14 +83,35 @@ public class UserController {
         }
         return "LoginPage.jsp";
     }
-    
 
-    @RequestMapping(value = {"/","/home"})
+    
+    @RequestMapping(value = {"/"})
     
     public String hostHome(Principal principal, Model model) {
         String email = principal.getName();
+        User currentUser = userService.findByEmail(email);
+        if (currentUser == null) {
+        	return "redirect:/login";
+        }
+		if(currentUser.getRoles().get(0).getName().equals("ROLE_ADMIN")) {
+			return "redirect:/admin";
+		}
+		else{
+			return "redirect:/home";
+		}
+        
+    }
+    
+    //Visitor Home
+    @RequestMapping(value = {"/home"})
+    public String visitorHome(Principal principal, Model model) {
+        String email = principal.getName();
         model.addAttribute("currentUser", userService.findByEmail(email));
-        return "homePage.jsp";
+        
+        List<User> hosts = userService.findAllHosts();
+        
+        model.addAttribute("hosts", hosts);
+        return "VisitorHome.jsp";
     }
     
 

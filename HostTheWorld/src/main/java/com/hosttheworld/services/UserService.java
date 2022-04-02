@@ -1,6 +1,8 @@
 package com.hosttheworld.services;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,15 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+	 public User findUserById(long id) {
+	     Optional<User> optionalDojo = userRepository.findById(id);
+	     if(optionalDojo.isPresent()) {
+	         return optionalDojo.get();
+	     } else {
+	         return null;
+	     }
+	 }
+
 
 	public List<User> findAll() {
 		
@@ -60,6 +71,18 @@ public class UserService {
 	 //Delete the user
 	 public void deleteUser(Long id) {
 		userRepository.deleteById(id);
+	}
+
+
+	public List<User> findAllHosts() {
+		List<User> users = findAll();
+		ArrayList<User> hosts = new ArrayList<>();
+		for (User user: users) {
+			if(user.getRoles().get(0).getName().equals("ROLE_HOST")) {
+				hosts.add(user);
+			}
+		}
+		return hosts;
 	}
 }
 
