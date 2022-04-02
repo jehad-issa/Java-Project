@@ -13,7 +13,11 @@
 <!-- For any Bootstrap that uses JS or jQuery-->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-
+<style>
+    form input[type="text"] {
+    text-transform: lowercase;
+}
+</style>
 </head>
 <body>
 	<div class="container-sm mt-3">

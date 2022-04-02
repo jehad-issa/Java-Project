@@ -38,8 +38,11 @@ public class HostApartment {
     @Positive
     private double price;
     
-    @NotEmpty(message = "location is required!")
-    private String location;
+    @NotNull(message = "location is required!")
+    private double longitude;
+    
+    @NotNull(message = "location is required!")
+    private double latitude;
     
     @NotEmpty(message = "Password is required!")
     private String description;
@@ -100,12 +103,22 @@ public class HostApartment {
 		this.price = price;
 	}
 
-	public String getLocation() {
-		return location;
+
+
+	public double getLongitude() {
+		return longitude;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 
 	public String getDescription() {

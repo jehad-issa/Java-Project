@@ -25,6 +25,11 @@
 			        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			        <input type="submit" value="Logout!" />
 			    </form>
+			    <form id="logoutForm" method="POST" action="/search">
+			        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			        <input name="search" class="form-control mt-4" placeholder="Search for a country" />
+			        <input type="submit" value="search" />
+			    </form>
             </div>
         </div>
     </div>
