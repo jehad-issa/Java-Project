@@ -16,9 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.URL;
 
 
 @Entity
@@ -32,8 +34,6 @@ public class HostApartment {
     @NotNull(message = "number of rooms is required!")
     private int numberOfRooms;
     
-    @NotNull(message = "Hostage capaity is required!")
-    private int hostageCapacity;
     
     @NotNull(message = "Hostage capaity is required!")
     @Positive
@@ -45,8 +45,17 @@ public class HostApartment {
     @NotNull(message = "location is required!")
     private double latitude;
     
-    @NotEmpty(message = "Password is required!")
+    @Size(min = 1, message = "Description is required!")
     private String description;
+    
+    @Size(min = 1 , message = "Country is required!")
+    private String country;
+    
+    @Size(min = 1 , message = "City is required!")
+    private String city;
+    
+    @URL
+    private String imgUrl;
     
     @Column(columnDefinition = "boolean default false")
     private boolean availability;
@@ -88,12 +97,20 @@ public class HostApartment {
 		this.numberOfRooms = numberOfRooms;
 	}
 
-	public int getHostageCapacity() {
-		return hostageCapacity;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setHostageCapacity(int hostageCapacity) {
-		this.hostageCapacity = hostageCapacity;
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public double getPrice() {
@@ -136,6 +153,14 @@ public class HostApartment {
 
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
+	}
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	public Date getCreatedAt() {

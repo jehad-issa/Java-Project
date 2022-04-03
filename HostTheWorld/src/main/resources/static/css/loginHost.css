@@ -1,0 +1,71 @@
+.container{
+    width: 50%;
+    height: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+.top{
+    width: 200px;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register,.login{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label{
+font-weight: bold;
+font-size: 20px;
+}
+
+input{
+    height: 22px;
+    width: 190px;
+    border-radius: 11px;
+    text-align: center;
+}
+
+body{
+    font-style: italic;
+    background-image: url("map2.jpg");
+    background-size: cover ;
+    margin-top: 60px;
+    color: white;
+}
+
+
+.btn{
+    width: 125px;
+    height: 40px;
+    font-weight: bold;
+    border: 2px solid black;
+    box-shadow: 3px 4px black;
+    border-radius: 11px;
+    cursor: pointer;
+    background-color:#d49c57;
+}
+
+body::before
+{
+    content: "       ";
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top:0;
+    height: 150%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.6;
+    z-index: -1;
+}
+

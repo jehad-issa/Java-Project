@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.URL;
+
 
 @Entity
 @Table(name="users")
@@ -36,22 +38,24 @@ public class User {
     @Size(min = 1 , message = "Email is required!")
     private String email;
     
-//    @NotEmpty(message = "Password is required!")
+    @Size(min = 1 , message = "please Enter your Phone number")
+    private String phoneNumber;
+    
     @Size(min = 8 , message = "Password must be 8 characters at least")
     private String password;
     
-//    @NotEmpty(message = "Password confirmation is required!")
     @Size(min = 8 , message = "Password confirmation is required!")
     @Transient
     private String passwordConfirmation;
     
-//    @NotEmpty(message = "Country is required!")
     @Size(min = 1 , message = "Country is required!")
     private String country;
     
-//    @NotEmpty(message = "City is required!")
     @Size(min = 1 , message = "City is required!")
     private String city;
+    
+    @URL
+    private String imgUrl;
     
     
     
@@ -66,7 +70,7 @@ public class User {
     private List<Role> roles;
     
     //Relationships with host apartments table
-    @OneToMany(mappedBy="host", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="host", fetch = FetchType.EAGER)
     private List<HostApartment> hostApartments;
     
     @ManyToMany(fetch = FetchType.LAZY)
@@ -77,7 +81,7 @@ public class User {
     private List<HostApartment> apartmentsToVisit;
     
     //Relationships with visitors Same Table(Self Join)
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "favorites", 
         joinColumns = @JoinColumn(name = "host_id"), 
@@ -123,6 +127,22 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getPassword() {

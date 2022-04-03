@@ -1,6 +1,7 @@
 package com.hosttheworld.controllers;
 
 import java.security.Principal;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hosttheworld.models.Review;
 import com.hosttheworld.models.User;
 import com.hosttheworld.services.UserService;
 import com.hosttheworld.validator.UserValidator;
@@ -43,7 +45,7 @@ public class UserController {
     	
     	if (result.hasErrors()) {
             return "HostForms.jsp";
-        }else if (userService.findAllHosts().size() == 0) {
+        }else if (userService.findAll().size() == 0) {
         	userService.saveWithAdminRole(host);
         	return "redirect:/login";
         }
@@ -96,7 +98,9 @@ public class UserController {
 		if(currentUser.getRoles().get(0).getName().equals("ROLE_ADMIN")) {
 			return "redirect:/admin";
 		}
-		else{
+		else if ((currentUser.getRoles().get(0).getName().equals("ROLE_HOST"))) {
+			return "redirect:/host/home";
+		}else{
 			return "redirect:/home";
 		}
         
@@ -112,6 +116,37 @@ public class UserController {
         
         model.addAttribute("hosts", hosts);
         return "VisitorHome.jsp";
+    }
+    
+    //Favorites
+    @RequestMapping(value = {"/favorites"})
+    public String favorites(Principal principal, Model model) {
+        String email = principal.getName();
+        User currentUser = userService.findByEmail(email);
+        model.addAttribute("currentUser", currentUser);
+        
+        List<User> favorites = currentUser.getLikedHosts();
+        
+        
+        model.addAttribute("favorites", favorites);
+        return "Favorites.jsp";
+    }
+    
+    //History
+    @RequestMapping(value = {"/history"})
+    public String history(Principal principal, Model model) {
+        String email = principal.getName();
+        User currentUser = userService.findByEmail(email);
+        model.addAttribute("currentUser", currentUser);
+        
+        List<Review> reviews = currentUser.getHostReviews();
+        HashSet<User> reviewed = new HashSet<>();
+        for (Review r: reviews) {
+        	reviewed.add(r.getHost());
+        }
+        
+        model.addAttribute("reviewed", reviewed);
+        return "History.jsp";
     }
     
 

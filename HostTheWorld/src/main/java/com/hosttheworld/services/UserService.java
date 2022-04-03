@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hosttheworld.models.Role;
 import com.hosttheworld.models.User;
 import com.hosttheworld.repositories.RoleRepository;
 import com.hosttheworld.repositories.UserRepository;
@@ -84,5 +85,18 @@ public class UserService {
 		}
 		return hosts;
 	}
+
+	public List<User> findByCountryContain(String search) {
+		return userRepository.findByCountryIsContaining(search);
+		
+	}
+
+
+	public void makeUserAdmin(User user, List<Role> role) {
+		user.setRoles(role);
+		userRepository.save(user);
+	}
+	
+	
 }
 

@@ -1,0 +1,12 @@
+body{
+    background-image: url("/img/map2.jpg");
+    background-size: cover ;
+    font-style: italic;
+    margin-top: 60px;
+    color: white;
+    
+    /* margin: 0 auto; */
+}
+input{
+	background: rgba(255, 255, 255, 0.6) !important;
+}

@@ -8,7 +8,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login or Register</title>
+<title>Register</title>
+<link rel="stylesheet" type="text/css" href="/css/welcome.css">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- For any Bootstrap that uses JS or jQuery-->
 <script src="/webjars/jquery/jquery.min.js"></script>
@@ -16,17 +17,18 @@
 
 </head>
 <body>
-	<div class="container-sm mt-3">
-        <div class="row justify-content-center">
-            <div class="col-md-6" style="text-align: center;">
-            	<h2 style="color: blue;">Host the world</h2>
-            </div>
-        </div>
-    </div>
 	<div class="container-sm mt-2">
         <div class="row justify-content-center">
-            <div class="col-md-5 me-5 p-4 mt-4">
-            	<h3>New Visitor</h3>
+            <div class="col-md-6 p-3 mt-2" style="background: rgba(76, 175, 80, 0.3); box-shadow: 0.2px 0.2px 0.2px green;">
+		       	<div class="row justify-content-center">
+		       		<div class="col-md-4 me-3">
+		       			<img alt="logo.png" src="/img/logo.png" style="height: 80px; width: 170px;">
+		       		</div>
+		   
+		       		<div class="col-md-7">
+		       			<h3  class="mt-4" style="text-align: center;"> <em>Join as Visitor</em></h3>
+		       		</div>
+        		</div>
                 <form:form action="/visitor/registration" method="POST" modelAttribute="visitor">
 
                     
@@ -48,7 +50,7 @@
 					<form:errors path="passwordConfirmation" style="color:red;"/>
 					
                     <div class="mt-4">
-					<button type="submit" class="btn btn-success">Register</button>
+					<button type="submit" class="btn" style="background-color: #842029; color: white;">Register</button>
 					</div>
                 </form:form>
             </div>
